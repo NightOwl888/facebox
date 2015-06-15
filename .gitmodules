@@ -1,0 +1,3 @@
+[submodule "dist/jquery.facebox"]
+	path = dist/jquery.facebox
+	url = https://github.com/NightOwl888/jquery.facebox.dist.git

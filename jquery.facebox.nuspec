@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+	  <id>jquery.facebox</id>
+	  <title>Facebox</title>
+	  <version>$version$</version>
+	  <authors>defunkt, kneath, snikch, NightOwl888</authors>
+	  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	  <summary>Facebook-style lightbox jQuery plugin.</summary>
+	  <description>Facebox is a jQuery-based, Facebook-style lightbox which can display images, divs, or entire remote pages.</description>
+	  <language>en-US</language>
+	  <tags>jquery plugin facebox lightbox dialog facebook</tags>
+	  <projectUrl>https://github.com/snikch/facebox</projectUrl>
+	  <iconUrl>https://raw.githubusercontent.com/snikch/facebox/master/branding/facebox-square.png</iconUrl>
+    <dependencies>
+      <dependency id="jQuery" version="1.4.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="dist\jquery.facebox\jquery.facebox.js" target="content\scripts"/>
+    <file src="dist\jquery.facebox\jquery.facebox.min.js" target="content\scripts"/>
+    <file src="dist\jquery.facebox\jquery.facebox.css" target="content\facebox"/>
+    <file src="dist\jquery.facebox\jquery.facebox.min.css" target="content\facebox"/>
+    <file src="dist\jquery.facebox\closelabel.png" target="content\facebox"/>
+    <file src="dist\jquery.facebox\loading.gif" target="content\facebox"/>
+  </files>
+</package>
