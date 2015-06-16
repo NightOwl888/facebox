@@ -10,8 +10,8 @@
 	  <description>Facebox is a jQuery-based, Facebook-style lightbox which can display images, divs, or entire remote pages.</description>
 	  <language>en-US</language>
 	  <tags>jquery plugin facebox lightbox dialog facebook</tags>
-	  <projectUrl>https://github.com/snikch/facebox</projectUrl>
-	  <iconUrl>https://raw.githubusercontent.com/snikch/facebox/master/branding/facebox-square.png</iconUrl>
+	  <projectUrl>https://github.com/NightOwl888/facebox</projectUrl>
+	  <iconUrl>https://raw.githubusercontent.com/NightOwl888/facebox/master/branding/facebox-square.png</iconUrl>
     <dependencies>
       <dependency id="jQuery" version="1.4.2" />
     </dependencies>
