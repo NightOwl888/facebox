@@ -20,7 +20,7 @@ var args = require('yargs').argv;
 var settings = {
     baseProject: 'jquery.facebox',
     src: ['./src/facebox.js'],
-    src_assets: ['./src/*.png', './src/*.gif'],
+    src_assets: ['./LICENSE*', './README.md', './src/*.png', './src/*.gif'],
     src_css: './src/*.css',
     dest: './dist/',
     nugetPath: './nuget.exe',
