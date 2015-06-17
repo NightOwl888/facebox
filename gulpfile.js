@@ -25,12 +25,15 @@ var settings = {
     dest: './dist/',
     nugetPath: './nuget.exe',
     subModules: ['jquery.facebox'], // All of the git submodule names (individual releases) for the build
-    version: ''
+    version: '',
+    debug: true
 };
 
 settings.version = getBuildVersion();
+settings.debug = getDebug();
 
 console.log('subModules: ' + settings.subModules);
+console.log('Debug mode: ' + settings.debug);
 
 
 // Builds the distribution files and packs them with NuGet
@@ -248,7 +251,11 @@ gulp.task('git-submodule-checkout', ['git-submodule-update-init'], function (cb)
 });
 
 gulp.task('git-checkout', ['git-submodule-checkout'], function (cb) {
-    git.checkout('master', { cwd: './' }, cb);
+    if (settings.debug == false) {
+        git.checkout('master', { cwd: './' }, cb);
+    } else {
+        cb();
+    }
 });
 
 gulp.task('git-release-modules', function (cb) {
@@ -277,7 +284,7 @@ gulp.task('git-release-modules', function (cb) {
                 }
                 else {
                     console.log('Pushing Git submodule ' + relativeWorkingPath + '...');
-                    if (shell.exec('cd "' + relativeWorkingPath + '" && git push origin master --follow-tags').code != 0) {
+                    if (shell.exec('cd "' + relativeWorkingPath + '" && git push origin master --follow-tags' + ((settings.debug) ? ' --dry-run' : '')).code != 0) {
                         shell.echo('Error: Git push failed for ' + relativeWorkingPath);
                         shell.exit(1);
                     }
@@ -312,7 +319,7 @@ gulp.task('git-submodule-update', ['git-tag'], function (cb) {
 });
 
 gulp.task('git-push', ['git-submodule-update'], function (cb) {
-    git.push('origin', 'master', { args: '--follow-tags', cwd: './' }, cb, function (err) {
+    git.push('origin', 'master', { args: '--follow-tags' + ((settings.debug) ? ' --dry-run' : ''), cwd: './' }, cb, function (err) {
         if (err) throw err;
     });
 });
@@ -355,4 +362,15 @@ function getBuildVersion() {
 function getPackageJsonVersion() {
     //We parse the json file instead of using require because require caches multiple calls so the version number won't be updated
     return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
+};
+
+function getDebug() {
+    var argsDebug = args.debug;
+
+    // Override the debug setting with the CLI argument --debug=false
+    if (typeof (argsDebug) !== 'undefined') {
+        return argsDebug.toLowerCase() === 'true';
+    }
+
+    return settings.debug;
 };
