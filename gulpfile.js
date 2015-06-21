@@ -22,6 +22,8 @@ var settings = {
     baseProject: 'jquery.facebox',
     src: ['./src/facebox.js'],
     src_assets: ['./LICENSE*', './README.md', './src/*.png', './src/*.gif', './pkg/*.json'],
+    src_json_files: ['./**/*.json', '!./node_modules/**', '!./dist/**'],
+    src_readme_files: ['./**/README*', '!./dist/**'],
     src_css: './src/*.css',
     dest: './dist/',
     nugetPath: './nuget.exe',
@@ -190,10 +192,8 @@ gulp.task('bump-version', function () {
 
     console.log('build type: ' + buildType);
 
-    var jsonFiles = ['./package.json', './pkg/*.json'];
-
     if (typeof (argsVersion) == 'undefined') {
-        return gulp.src(jsonFiles, { base: './' })
+        return gulp.src(settings.src_json_files, { base: './' })
             .pipe(bump({ type: buildType }))
             .pipe(tap(function (file, t) {
                 var newPkg = JSON.parse(file.contents.toString());
@@ -202,7 +202,7 @@ gulp.task('bump-version', function () {
             .pipe(gulp.dest('./'));
     }
     else {
-        return gulp.src(jsonFiles, { base: './' })
+        return gulp.src(settings.src_json_files, { base: './' })
             .pipe(bump({ version: settings.version, preid: preid }))
             .pipe(gulp.dest('./'));
     }
@@ -218,7 +218,7 @@ gulp.task('bump-source-version', ['bump-version'], function () {
 });
 
 gulp.task('bump-readme-version', ['bump-source-version'], function () {
-    return gulp.src('./README*', { base: './' })
+    return gulp.src(settings.src_readme_files, { base: './' })
         // Replace the version number in the CDN URLs
         .pipe(replace(eval('/\\/' + settings.baseProject + '\\/\\d+\\.\\d+\\.\\d+(?:-\\w+)?\\//g'), '/' + settings.baseProject + '/' + settings.version + '/'))
         .pipe(replace(eval('/' + settings.baseProject + '\\@\\d+\\.\\d+\\.\\d+(?:-\\w+)?/g'), settings.baseProject + '@' + settings.version))
