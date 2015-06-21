@@ -21,7 +21,7 @@ var args = require('yargs').argv;
 var settings = {
     baseProject: 'jquery.facebox',
     src: ['./src/facebox.js'],
-    src_assets: ['./LICENSE*', './README.md', './src/*.png', './src/*.gif'],
+    src_assets: ['./LICENSE*', './README.md', './src/*.png', './src/*.gif', './pkg/*.json'],
     src_css: './src/*.css',
     dest: './dist/',
     nugetPath: './nuget.exe',
@@ -190,7 +190,7 @@ gulp.task('bump-version', function () {
 
     console.log('build type: ' + buildType);
 
-    var jsonFiles = ['./package.json', settings.dest + '**/*.json'];
+    var jsonFiles = ['./package.json', './pkg/*.json'];
 
     if (typeof (argsVersion) == 'undefined') {
         return gulp.src(jsonFiles, { base: './' })
