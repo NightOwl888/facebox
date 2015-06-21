@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     rename = require('gulp-rename'),
+    replace = require('gulp-replace'),
     sourcemaps = require('gulp-sourcemaps'),
 	request = require('request'),
     fs = require('fs'),
@@ -34,7 +35,6 @@ settings.debug = getDebug();
 
 console.log('subModules: ' + settings.subModules);
 console.log('Debug mode: ' + settings.debug);
-
 
 // Builds the distribution files and packs them with NuGet
 gulp.task('default', function (cb) {
@@ -208,12 +208,20 @@ gulp.task('bump-version', function () {
     }
 });
 
+gulp.task('bump-source-version', ['bump-version'], function () {
+    return gulp.src(settings.src, { base: './' })
+        // Replace the version number in the header comment
+        // and in the CDN URLs
+        .pipe(replace(/\d+\.\d+\.\d+(?:-\w+)?/g, settings.version))
+        .pipe(gulp.dest('.'));
+});
+
 // Bumps the version number.
 // CLI args:
 //   --version=1.0.0     // sets the build to a specific version number
 //   --buildType=minor   // if the version is not specified, increments the minor version and resets the patch version to 0
 //                       // allowed values: major, minor, patch
-gulp.task('bump', ['bump-version'], function (cb) {
+gulp.task('bump', ['bump-source-version'], function (cb) {
     console.log('Successfully bumped version to: ' + settings.version);
     cb();
 });
