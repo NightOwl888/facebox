@@ -212,7 +212,16 @@ gulp.task('bump-source-version', ['bump-version'], function () {
     return gulp.src(settings.src, { base: './' })
         // Replace the version number in the header comment
         // and in the CDN URLs
-        .pipe(replace(/\d+\.\d+\.\d+(?:-\w+)?/g, settings.version))
+        .pipe(replace(eval('/version:\\s*?\\d+\\.\\d+\\.\\d+(?:-\\w+)?/g'), 'version: ' + settings.version))
+        .pipe(replace(eval('/\\/' + settings.baseProject + '\\/\\d+\\.\\d+\\.\\d+(?:-\\w+)?\\//g'), '/' + settings.baseProject + '/' + settings.version + '/'))
+        .pipe(gulp.dest('.'));
+});
+
+gulp.task('bump-readme-version', ['bump-source-version'], function () {
+    return gulp.src('./README*', { base: './' })
+        // Replace the version number in the CDN URLs
+        .pipe(replace(eval('/\\/' + settings.baseProject + '\\/\\d+\\.\\d+\\.\\d+(?:-\\w+)?\\//g'), '/' + settings.baseProject + '/' + settings.version + '/'))
+        .pipe(replace(eval('/' + settings.baseProject + '\\@\\d+\\.\\d+\\.\\d+(?:-\\w+)?/g'), settings.baseProject + '@' + settings.version))
         .pipe(gulp.dest('.'));
 });
 
@@ -221,7 +230,7 @@ gulp.task('bump-source-version', ['bump-version'], function () {
 //   --version=1.0.0     // sets the build to a specific version number
 //   --buildType=minor   // if the version is not specified, increments the minor version and resets the patch version to 0
 //                       // allowed values: major, minor, patch
-gulp.task('bump', ['bump-source-version'], function (cb) {
+gulp.task('bump', ['bump-readme-version'], function (cb) {
     console.log('Successfully bumped version to: ' + settings.version);
     cb();
 });
