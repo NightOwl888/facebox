@@ -19,9 +19,9 @@
   <files>
     <file src="dist\jquery.facebox\jquery.facebox.js" target="content\scripts"/>
     <file src="dist\jquery.facebox\jquery.facebox.min.js" target="content\scripts"/>
-    <file src="dist\jquery.facebox\jquery.facebox.css" target="content\facebox"/>
-    <file src="dist\jquery.facebox\jquery.facebox.min.css" target="content\facebox"/>
-    <file src="dist\jquery.facebox\closelabel.png" target="content\facebox"/>
-    <file src="dist\jquery.facebox\loading.gif" target="content\facebox"/>
+    <file src="dist\jquery.facebox\jquery.facebox.css" target="content\content\facebox"/>
+    <file src="dist\jquery.facebox\jquery.facebox.min.css" target="content\content\facebox"/>
+    <file src="dist\jquery.facebox\closelabel.png" target="content\content\facebox"/>
+    <file src="dist\jquery.facebox\loading.gif" target="content\content\facebox"/>
   </files>
 </package>
