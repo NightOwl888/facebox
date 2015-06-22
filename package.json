@@ -1,6 +1,6 @@
 {
   "name": "jquery.facebox",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Facebook-style lightbox jQuery plugin.",
   "main": "./src/facebox.js",
   "style": [
