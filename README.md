@@ -32,12 +32,12 @@ There are several different ways to get the code. Some examples below:
 #### CDN
 Dirty Forms is available over jsDelivr CDN and can directly included to every page.
 ```HTML
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.facebox/1.4.1/jquery.facebox.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery.facebox@1.4.1/jquery.facebox.min.js"></script>
 ```
 
 jsDelivr also supports [on-the-fly concatenation of files](https://github.com/jsdelivr/jsdelivr#load-multiple-files-with-single-http-request), so you can reference only 1 URL to get jQuery and jquery.facebox in one request.
 ```HTML
-<script type="text/javascript" src="//cdn.jsdelivr.net/g/jquery@1.11.3,jquery.facebox@1.4.1"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/combine/npm/jquery@1.11.3,npm/jquery.facebox@1.4.1"></script>
 ```
 
 #### Self-Hosted
@@ -74,7 +74,7 @@ A [SourceMap](https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-
 ####CDN
 
 ```HTML
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.facebox/1.4.1/jquery.facebox.min.js.map"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery.facebox@1.4.1/jquery.facebox.min.js.map"></script>
 ```
 
 #### Package Managers
